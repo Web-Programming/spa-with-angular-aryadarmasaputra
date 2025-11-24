@@ -4,29 +4,40 @@ import { Profile } from './profile/profile';
 import { Login } from './login/login';
 import { Register } from './register/register';
 import { Contact } from './contact/contact';
+import { Detail } from './detail/detail';
 
 export const routes: Routes = [
-  //mengatuh halaman utama aplikasi
+  //mengatur halaman utama aplikasi
   {
     path: '',
     component: HomeComponent,
     title: 'Home Page',
   },
   {
-    path: '',
+    path: 'profile',
     component: Profile,
-    //title : "Profile Page"
+    title: 'Profile Page',
   },
   {
-    path: '',
+    path: 'login',
     component: Login,
   },
   {
-    path: '',
+    path: 'register',
     component: Register,
   },
   {
-    path: '',
+    path: 'contact',
     component: Contact,
+  },
+  {
+    path: 'property/:id', // ← Route dengan parameter
+    component: Detail,
+    title: 'Detail Property - Griya MDP',
+  },
+  {
+    path: '**', // ← Wildcard untuk 404
+    redirectTo: '',
+    pathMatch: 'full',
   },
 ];
