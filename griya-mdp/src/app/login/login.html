@@ -11,6 +11,34 @@
         <!-- Login Form Card -->
         <div class="card shadow-lg border-0">
           <div class="card-body p-4 p-md-5">
+            <div
+              class="alert alert-success alert-dismissible fade show"
+              role="alert"
+              *ngIf="successMessage"
+            >
+              <i class="bi bi-check-circle-fill me-2"></i>{{ successMessage }}
+              <button
+                type="button"
+                class="btn-close"
+                (click)="successMessage = ''"
+                aria-label="Close"
+              ></button>
+            </div>
+
+            <!-- Error Alert -->
+            <div
+              class="alert alert-danger alert-dismissible fade show"
+              role="alert"
+              *ngIf="errorMessage"
+            >
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ errorMessage }}
+              <button
+                type="button"
+                class="btn-close"
+                (click)="errorMessage = ''"
+                aria-label="Close"
+              ></button>
+            </div>
             <!-- Form akan berada di sini -->
             <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
               <!-- Form fields -->
@@ -60,6 +88,13 @@
                   placeholder="Masukkan password Anda"
                   required
                 />
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  (click)="showPassword = !showPassword"
+                >
+                  <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                </button>
                 <div
                   class="invalid-feedback"
                   *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
@@ -85,6 +120,12 @@
                   class="btn btn-primary btn-lg py-3"
                   [disabled]="loginForm.invalid"
                 >
+                  <span
+                    *ngIf="isLoading"
+                    class="spinner-border spinner-border-sm me-2"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
                   <i class="bi bi-box-arrow-in-right me-2"></i>Login
                 </button>
               </div>
